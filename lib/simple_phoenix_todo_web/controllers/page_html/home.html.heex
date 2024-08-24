@@ -1,0 +1,23 @@
+<%= Phoenix.Flash.get(@flash, :info) %>
+
+<.form :let={f} for={@changeset} action={~p"/create"}>
+  <.input field={f[:title]} />
+  <button>Create</button>
+</.form>
+
+<h2>Todos</h2>
+<ul>
+  <%= for todo <- @todos do %>
+    <li>
+      <%= todo.title %> - <%= todo.status %> |
+      <.link href={~p"/toggle/#{todo.id}"}>
+        <%= if todo.status == "Done" do %>
+          Mark as Not Done
+        <% else %>
+          Mark as Done
+        <% end %>
+      </.link>
+      | <.link href={~p"/delete/#{todo.id}"}>X</.link>
+    </li>
+  <% end %>
+</ul>
